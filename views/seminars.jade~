@@ -1,0 +1,17 @@
+h2.dashboard-title= title
+
+- each seminer,index in seminars
+  div(class="seminer dashboard "+(index % 2 == 0 ? "sol-dashboard" : "sag-dashboard"))
+    h3.dashboard-title= "Seminer "+(index+1)
+    a.duzenle-button(href="/yonetim/seminerler/"+seminer._id+"/duzenle")= "DUZENLE"
+    p= seminer.name
+    .gunler
+        span(class=(seminer.days.pazartesi.active ? "active" : "")) P.Tesi
+        span(class=(seminer.days.sali.active ? "active": "")) Salı
+        span(class=(seminer.days.carsamba.active ? "active": "")) Çarş.
+        span(class=(seminer.days.persembe.active ? "active": "")) Perş.
+        span(class=(seminer.days.cuma.active ? "active": "")) Cuma
+        span(class=(seminer.days.cumartesi.active ? "active": "")) C.Tesi
+        span(class=(seminer.days.pazar.active ? "active": "")) Pazar
+  - if (index % 2 != 0)
+    .clear

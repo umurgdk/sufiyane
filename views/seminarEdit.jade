@@ -1,0 +1,45 @@
+h2.dashboard-title= title
+
+form(action="/yonetim/seminerler/"+seminar._id+"/duzenle", method="post", id="newform")
+  .form-section
+    label(for="name")= "İsim:"
+    input.oneline-edit(name="name", id="name", type="text", value=seminar.name)
+    .clear
+
+  .form-section
+    label(for="active")= "Aktif Mi?"
+    input(name="active", id="active", type="checkbox", checked=seminar.active)
+    .clear
+
+  .form-section
+    label(for="gunsaat")= "Gün/Saat:"
+    #gunsaat
+
+  .form-section
+    label(for="shortText")= "Kısa Açıklama:"
+    textarea.oneline-edit(name="shortText", id="shortText", rows="7", cols="10")= seminar.shortText
+    .clear
+
+  .form-section
+    label(for="text")= "Metin:"
+    textarea.oneline-edit(name="text", id="text", rows="7", cols="10")= seminar.text
+    .clear
+
+  
+
+  input(type="submit", value="Kaydet", id="submit")
+
+- var openDays = ""
+
+- each day in days
+  - openDays += "this.gunsaat.setDayValue('"+day.name+"', '"+day.start+"', '"+day.end+"');\n";
+  
+script
+  window.addEvent('domready', function ( ) {
+    $('text').getParent().setStyle('height', $('text').getSize().y + "px");
+    $('shortText').getParent().setStyle('height', $('shortText').getSize().y + "px");
+    this.gunsaat = new DayHourWidget('gunsaat');
+    #{openDays}
+  });
+
+  

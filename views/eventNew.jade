@@ -1,0 +1,86 @@
+h2.dashboard-title= title
+- var name     = (event ? event.name           : "");
+- var text     = (event ? event.text           : "")
+- var future   = (event ? event.future         : false);
+- var pImage   = (event ? event.photoUrl       : null);
+- var target   = (event ? event._id+"/duzenle" : "yeni");
+
+form(action="/yonetim/etkinlikler/"+target, method="post", id="newform")
+  .form-section
+    label(for="name")= "Başlık:"
+    input.oneline-edit(name="name", id="name", type="text", value=name)
+    .clear
+
+  .form-section
+    label(for="future")= "Zamanlama:"
+    select(name="future", id="future")
+      option(value="true", selected=(future)) Gelecek
+      option(value="false", selected=(!future)) Geçmiş
+    .clear
+
+  .form-section
+    label(for="text")= "Metin:"
+    textarea.oneline-edit(name="text", id="text", rows="10", cols="10")= text
+    .clear
+
+  .form-section
+    label(for="photo")= "Resim:"
+
+    img.crop.show(id="pImage", src="/images/events/normal/"+pImage, width="350")
+    button.degistir(id="resimDegistir")=  "Resmi Değiştir"
+
+    input(name="file", id="file", type="file")
+    .clear
+    img(src="", id="targetImg")
+    #cropArea
+
+    input(type="hidden", name="coords[x]", id="coords_x")
+    input(type="hidden", name="coords[y]", id="coords_y")
+    input(type="hidden", name="coords[w]", id="coords_w")
+    input(type="hidden", name="coords[h]", id="coords_h")
+    input(type="hidden", name="image[data]", id="image_data")
+    input(type="hidden", name="image[name]", id="image_name")
+  .clear
+
+  input(type="submit", value="Kaydet", id="submit")
+
+- var hiders = (event ? "$('#file').hide();$('#targetImg').hide();$('#cropArea').hide();" : "$('#pImage, #resimDegistir').hide();");
+- var degistirmece = (event ? "$('#resimDegistir').click(function () {$('#pImage, #resimDegistir').hide();$('#file, #targetImg, #cropArea').show(); makeEditable();return false;});" : "makeEditable();");
+
+script
+  $(document).ready(function () {
+      $('#text').parent().height($('#text').height() + 10)
+
+      !{hiders}       
+        
+      var sendImageData = false;
+      var makeEditable = function () {
+        sendImageData = true;
+        $('#targetImg').hide();
+        $('#file').crop5({
+          targetImg   : $('#targetImg'),
+          minSize     : null,
+          aspectRatio : 0,
+          selectionCallback: function(coords) {
+            $('#coords_x').val(coords.x);
+            $('#coords_y').val(coords.y);
+            $('#coords_w').val(coords.w);
+            $('#coords_h').val(coords.h);
+          }, loadCallback: function(img) {
+            $('#image_data').val(img);
+          }, readCallback: function(file) {
+            $('#image_name').val(file.name);
+        }});
+      };
+
+      !{degistirmece}        
+
+      $('#submit').click(function() {
+        if (!sendImageData) {
+          $("#coords_x, #coords_y, #coords_w, #coords_h").remove();
+          $("#image_data, #image_name").remove();
+        }
+
+        $('#file').remove();
+      });
+  });

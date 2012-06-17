@@ -1,0 +1,15 @@
+
+node.js:134
+        throw e; // process.nextTick error, or 'error' event on first tick
+        ^
+Error: Unkown image format
+    at /home/sufiyane/webapps/sufiyane/app.js:675:12
+    at /home/sufiyane/webapps/sufiyane/app.js:670:3
+    at /home/sufiyane/webapps/sufiyane/modules/types.js:674:6
+    at /home/sufiyane/webapps/sufiyane/node_modules/async/lib/async.js:395:21
+    at /home/sufiyane/webapps/sufiyane/modules/types.js:636:3
+    at Object.saveImageFromData (/home/sufiyane/webapps/sufiyane/modules/image.js:68:2)
+    at /home/sufiyane/webapps/sufiyane/modules/types.js:631:10
+    at /home/sufiyane/webapps/sufiyane/node_modules/async/lib/async.js:484:34
+    at Array.<anonymous> (/home/sufiyane/webapps/sufiyane/node_modules/async/lib/async.js:408:34)
+    at EventEmitter._tickCallback (node.js:126:26)

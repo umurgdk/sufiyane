@@ -1,0 +1,17 @@
+h2.dashboard-title= title
+
+.toolbar
+  ul
+    li
+      a.tool-button.kat-duzenle(href="/yonetim/"+type+"/kategori/"+category._id+"/duzenle")
+        İsmini Değiştir
+
+.clear
+
+.dashboard
+  h3.dashboard-title Ürünler
+  ul.dashboard-list
+    - each urun in products
+      li
+        a.name(href="/yonetim/"+type+"/urun/"+urun._id+"/duzenle")= urun.name
+        a.delete(href="/yonetim/"+type+"/urun/"+urun._id+"/sil/") Sil	

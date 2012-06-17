@@ -1,0 +1,40 @@
+h2.dashboard-title= title
+
+form(action="/yonetim/iletisim/duzenle", method="post")
+  .form-section
+    label(for="telephone")= "Telefon:"
+    input.oneline-edit(name="telephone", id="telephone", type="text", value=contact.telephone)
+    .clear
+
+  .form-section
+    label(for="fax")= "Fax:"
+    input.oneline-edit(name="fax", id="fax", type="text", value=contact.fax)
+    .clear
+
+  .form-section
+    label(for="email")= "E-Posta:"
+    input.oneline-edit(name="email", id="email", type="text", value=contact.email)
+    .clear
+
+  .form-section
+    label(for="address")= "Adres:"
+    textarea.oneline-edit(name="address", id="address", rows="10", cols="10")= contact.address
+
+  h3.dashboard-title= "Çalışma Saatleri"
+  
+  .form-section
+    label(for="weekday")= "H.İçi"
+    input.oneline-edit(name="weekday", id="weekday", type="text", value=contact.weekday)
+    .clear
+
+  .form-section
+    label(for="weekend")= "H.Sonu"
+    input.oneline-edit(name="weekend", id="weekend", type="text", value=contact.weekend)
+    .clear
+  
+  input(type="submit", value="Kaydet", id="submit")
+
+script
+  window.addEvent('domready', function ( ) {
+    $('address').getParent().setStyle('height', $('address').getSize().y + "px");
+  });

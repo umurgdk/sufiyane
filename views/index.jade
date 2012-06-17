@@ -1,0 +1,10 @@
+#urun-dashboard
+  - each type,index in types
+    div(class=(index % 2 == 0 ? "sol" : "sag")+"-dashboard dashboard")
+      h2.dashboard-title= type.title
+      ul.dashboard-list
+        - each kat in type.categories
+          li
+            a.name(href="/yonetim/"+type.name+"/kategori/"+kat._id)= kat.name
+            a.delete(href="/yonetim/"+type.name+"/kategori/"+kat._id+"/sil") Sil
+  .clear

@@ -1,0 +1,60 @@
+h2.dashboard-title= title
+
+.toolbar
+  ul
+    li
+      a.tool-button.yazi-duzenle(href='/yonetim/iletisim/duzenle')
+        | İletişim Bilgilerini Düzenle
+
+.dashboard.dashboard-iltisim-bilgileri
+  h3.dashboard-title İletişim Bilgileri
+  table(cellpadding=0, cellspacing=0, width="100%")
+    tr
+      td.bilgi-title.
+        Telefon:
+      td.bilgi-content.
+        #{contact.telephone}
+      td.bilgi-title.
+        Fax:
+      td.bilgi-content.
+        #{contact.fax}
+    tr
+      td.bilgi-title.
+        E-Posta Adresi:
+      td.bilgi-content(colspan=3).
+        #{contact.email}
+    tr
+      td.bilgi-title.
+        H.İçi Çalışma Saati:
+      td.bilgi-content.
+        #{contact.weekday}
+      td.bilgi-title.
+        H.Sonu Çalışma Saati:
+      td.bilgi-content.
+        #{contact.weekend}
+    tr
+      td.bilgi-title(valign="top").
+        Adres
+      td.bilgi-content(colspan=3).
+        !{contact.address}
+          
+.div(style="height: 30px;")
+  
+.dashboard.dashboard-iletisim-listesi
+  h3.dashboard-title Gelen Mesajlar
+  - each msg in messages
+    - var href = '/yonetim/iletisim/mesaj/'+msg._id;
+    div(class="contact-message "+(msg.marked ? "marked" : ""))
+      a.sender(href=href)= msg.name
+      a.message-teaser(href=href)= msg.message.substr(0,38)
+      a.message-email(href=href)= msg.email
+      div.invisible-date(title=msg.date)
+      a.sil-button.msg-sil(href='/yonetim/iletisim/mesaj/'+msg._id+'/sil')
+        | SİL
+script
+  window.addEvent('domready', function ( ) {
+    var myTips = new Tips('.invisible-date');
+    myTips.addEvent('show', function(tip, el) {
+      tip.addClass('myTip').fade('in');
+    });
+  });

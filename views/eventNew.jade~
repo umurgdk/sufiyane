@@ -1,0 +1,5 @@
+h2.dashboard-title= title
+- var name     = (event ? event.name     : null)
+- var future   = (event ? event.future   : null)
+- var pImage   = (event ? event.photoUrl : null)
+

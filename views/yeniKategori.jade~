@@ -1,0 +1,6 @@
+h2.dashboard-title= title
+form.oneline(action="/yonetim/"+type"+/kategori/yeni", method="post")
+  label(for="isim") Kategori İsmi
+  input.oneline-edit(name="isim", id="isim", type="text")
+  input(value="Kaydet")
+    

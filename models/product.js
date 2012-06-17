@@ -1,0 +1,22 @@
+var mongoose = require('mongoose');
+var Schema   = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
+
+exports.ProductModel = new Schema({
+    type        : String,
+    name        : String,
+    description : String,
+    date        : { type: Date, default: Date.now },
+    category    : ObjectId,
+    photo       : {
+	big     : String,
+	small   : String
+    },
+    urls        : {
+	big     : String,
+	small   : String
+    }
+});
+
+mongoose.model ("Product", exports.ProductModel);
+

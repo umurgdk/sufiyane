@@ -1,0 +1,42 @@
+!!!
+html
+  head
+    title "Üye Girişi"
+    - each style in stylesheets
+      link(rel='stylesheet', href='/css/'+style+'.css')
+    - each scr in scripts
+      script(type="text/javascript", src="/js/"+scr+".js")
+  body
+    div#page
+      div#login-box
+        div.login-title= "Sufiyane Giriş"
+        div.login-form
+          form(action="/girisyap", method="post")
+            div.form-row
+              input#username(type="text", name="username", value="Üye adı")
+            div.form-row
+              input#password(type="text", name="password", value="Şifre")
+            div.form-row.row-submit
+              input(type="submit", value="Giriş")
+    
+    
+    script
+      window.addEvent('domready', function() {
+        var clear = function(el) {
+          el = el.target;
+          el.set('value', '');
+          el.removeEvent('focus', clear);
+          el.addClass('normal');
+        };
+    
+        var clearPassword = function(el) {
+          el = el.target;
+          el.set('value', '');
+          el.set('type', 'password');
+          el.removeEvent('focus', clearPassword);
+          el.addClass('normal');
+        };
+        $("username").addEvent('focus', clear);
+        $("password").addEvent('focus', clearPassword);
+      });
+      

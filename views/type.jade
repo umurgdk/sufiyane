@@ -1,0 +1,24 @@
+h2.dashboard-title= title
+
+.toolbar
+  ul
+    li: a.tool-button.kat-yeni(href="/yonetim/"+type+"/kategori/yeni") Yeni Kategori
+    li: a.tool-button.urun-yeni(href="/yonetim/"+type+"/urun/yeni") Yeni Ürün
+
+.clear    
+.sol-dashboard.dashboard
+  h3.dashboard-title Kategoriler
+  ul.dashboard-list
+    - each kat in categories
+      li
+        a.name(href="/yonetim/"+type+"/kategori/"+kat._id)= kat.name
+        a.delete(href="/yonetim/"+type+"/kategori/"+kat._id+"/sil") Sil
+
+.sag-dashboard.dashboard
+  h3.dashboard-title Son Eklenen Ürünler
+  ul.dashboard-list
+    - each urun in products
+      li
+        a.name(href="/yonetim/"+type+"/urun/"+urun._id+"/duzenle")= urun.name
+        a.delete(href="/yonetim/"+type+"/urun/"+urun._id+"/sil/") Sil	
+.clear

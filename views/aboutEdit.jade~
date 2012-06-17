@@ -1,0 +1,6 @@
+h2.dashboard-title= title
+
+form(action="/yonetim/hakkimizda/duzenle", method="post")
+  .form-section
+    textarea.oneline-edit(name="text", id="text", rows="10, cols="15")= about.text
+  .clear

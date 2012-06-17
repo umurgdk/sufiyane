@@ -1,0 +1,76 @@
+h2.dashboard-title= title
+
+- var photo       = (founder.photoUrl ? founder.photoUrl : false);
+
+form(action="/yonetim/hakkimizda/kurucu/"+id, method="post")
+  
+  .form-section
+    label(for="name")= "Ad Soyad:"
+    input.oneline-edit(type="text", name="name", id="name", value=founder.name)
+    .clear
+    
+  .form-section
+    label(for="description")= "Özgeçmiş Yazısı:"
+    textarea.oneline-edit.ozgecmis(name="description", id="description", rows="7", cols="10")= founder.description
+    .clear
+
+  .form-section
+    label(for="file")= "Fotoğraf:"
+    
+    img.crop.show.founder(id="pImage", src="/images/founders/normal/"+founder.photoUrl, width="150")
+    br
+    button.degistir.founder(id="resimDegistir")= "Resmi Değiştir"
+
+    input(name="file", id="file", type="file")
+    .clear
+    img(src="", id="targetImg")
+    #cropArea
+
+    input(type="hidden", name="coords[x]", id="coords_x")
+    input(type="hidden", name="coords[y]", id="coords_y")
+    input(type="hidden", name="coords[w]", id="coords_w")
+    input(type="hidden", name="coords[h]", id="coords_h")
+    input(type="hidden", name="image[data]", id="image_data")
+    input(type="hidden", name="image[name]", id="image_name")
+  .clear
+
+  input(type="submit", value="Kaydet", id="submit")
+
+- var hiders = (founder.photoUrl ? "$('#file').hide();$('#targetImg').hide();$('#cropArea').hide();" : "$('#pImage, #resimDegistir').hide();");
+- var degistirmece = (founder.photoUrl ? "$('#resimDegistir').click(function () {$('#pImage, #resimDegistir').hide();$('#file, #targetImg, #cropArea').show(); makeEditable();return false;});" : "makeEditable();");
+
+script
+  $(document).ready(function () {
+      $('#description').parent().height($('#description').height() + 10)
+
+      !{hiders}       
+        
+      var sendImageData = false;
+      var makeEditable = function () {
+        sendImageData = true;
+        $('#targetImg').hide();
+        $('#file').crop5({
+          targetImg : $('#targetImg'),
+          selectionCallback: function(coords) {
+            $('#coords_x').val(coords.x);
+            $('#coords_y').val(coords.y);
+            $('#coords_w').val(coords.w);
+            $('#coords_h').val(coords.h);
+          }, loadCallback: function(img) {
+            $('#image_data').val(img);
+          }, readCallback: function(file) {
+            $('#image_name').val(file.name);
+        }});
+      };
+
+      !{degistirmece}        
+
+      $('#submit').click(function() {
+        if (!sendImageData) {
+          $("#coords_x, #coords_y, #coords_w, #coords_h").remove();
+          $("#image_data, #image_name").remove();
+        }
+
+        $('#file').remove();
+      });
+  });

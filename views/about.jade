@@ -1,0 +1,37 @@
+h2.dashboard-title= title
+
+.toolbar
+  ul
+    li
+      a.tool-button.yazi-duzenle(href="/yonetim/hakkimizda/duzenle")
+        | Hakkımızda Yazısını Düzenle
+
+.clear
+
+.dashboard.sol-dashboard.dashboard-hakkimizda
+  h3.dashboard-title Hakkımızda Yazısı
+  p!= (about.text === "" ? "Henüz yazmamışsınız!" : about.text)
+
+.dashboard.sag-dashboard.dashboard-kurucular
+  h3.dashboard-title Kurucular
+  ul.dashboard-list.kurucular-list
+    - each founder,index in about.founders
+      li
+        a.kurucu-isim(href="/yonetim/hakkimizda/kurucu/"+index)
+          img(src=(founder.photo?"/images/founders/normal/"+founder.photoUrl:"/img/buddy.png"),class=(founder.photo?"photo":null),width=28,height=28)
+          | #{founder.name}
+        
+
+.clear
+
+script
+  $(document).ready(function () {
+    var hak = $('.dashboard-hakkimizda');
+    var kur = $('.dashboard-kurucular');
+    
+    if(hak.height() > kur.height()) {
+      kur.height(hak.height());
+    } else {
+      hak.height(kur.height());
+    }
+  });

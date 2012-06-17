@@ -1,0 +1,20 @@
+h2.dashboard-title= title
+
+.dashboard.contact-message.showMessage
+  div.message-header
+    span.sender= msg.name
+    a.message-email(href="mailto:"+msg.email)= msg.email
+    div.invisible-date(title=msg.date)
+    a.sil-button.msg-sil(href='/yonetim/iletisim/mesaj/'+msg._id+'/sil')
+      | SİL
+  .clear
+  div.message-content
+    p= msg.message
+
+script
+  window.addEvent('domready', function ( ) {
+    var myTips = new Tips('.invisible-date');
+    myTips.addEvent('show', function(tip, el) {
+      tip.addClass('myTip').fade('in');
+    });
+  });

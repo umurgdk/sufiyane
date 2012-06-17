@@ -1,0 +1,8 @@
+h2.dashboard-title= title
+- var target = (category ? category._id + "/duzenle" : "yeni");
+- var value  = (category ? category.name : "");
+form.oneline(action="/yonetim/"+type+"/kategori/"+target, method="post")
+  label(for="isim")= "Kategori İsmi:"
+  input.oneline-edit(name="isim", id="isim", type="text", value=value)
+  input(type="submit", value="Kaydet")
+    

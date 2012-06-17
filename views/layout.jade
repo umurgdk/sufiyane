@@ -1,0 +1,17 @@
+!!!
+html
+  head
+    title= title
+    //link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/css/navigationa.css')
+    link(rel='stylesheet', href='/css/maina.css')
+    link(rel='stylesheet', href='/css/type.css')
+    link(rel='stylesheet', href='/css/forma.css')
+    - each st in styles
+      link(rel='stylesheet', href='/css/'+st+'.css')
+    - each srpt in scripts
+      script(src='/js/'+srpt+'.js')
+  body
+    include includes/navigation
+    div!= messages()
+    #content!= body

@@ -1,0 +1,22 @@
+h2.dashboard-title= title
+
+form(action="/yonetim/iletisim/duzenle", method="post")
+  .form-section
+    label(for="telephone")= "Telefon:"
+    input.oneline-edit(name="telephone", id="telephone", type="text", value=contact.telephone)
+    .clear
+
+  .form-section
+    label(for="fax")= "Fax:"
+    input.oneline-edit(name="fax", id="fax", type="text", value=contact.fax)
+    .clear
+
+  .form-section
+    label(for="email")= "E-Posta:"
+    input.oneline-edit(name="email", id="email", type="text", value=contact.email)
+    .clear
+
+  h3.dashboard-title= "Çalışma Saatleri"
+  
+  .form-section
+    label(for="weekday")= "

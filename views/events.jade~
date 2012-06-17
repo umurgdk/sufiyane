@@ -1,0 +1,26 @@
+h2.dashboard-title= title
+
+.toolbar
+  ul
+    li
+      a.tool-button.urun-yeni(href="/yonetim/etkinlik/yeni")= "Yeni Etkinlik"
+
+.clear
+
+.dashboard.sol-dashboard
+  h3.dashboard-title Gelecek Etkinlikler
+  ul.dashboard-list.kurucular-list
+    - each event in futureEvents
+      li
+        a.kurucu-isim(href="/yonetim/etkinlikler/"+event._id+"/duzenle")
+          img.photo(src=event.photoUrl, width=28, height=28)
+          | #{event.name}
+            
+.dashboard.sag-dashboard
+  h3.dashboard-title Geçmiş Etkinlikler
+  ul.dashboard-list.kurucular-list
+    - each event in futureEvents
+      li
+        a.kurucu-isim(href="/yonetim/etkinlikler/"+event._id+"/duzenle")
+          img.photo(src=event.photoUrl, width=28, height=28)
+          | #{event.name}

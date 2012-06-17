@@ -1,0 +1,36 @@
+h2.dashboard-title= title
+
+.toolbar
+  ul
+    li
+      a.tool-button.urun-yeni(href="/yonetim/etkinlikler/yeni")= "Yeni Etkinlik"
+
+.clear
+
+.dashboard.sol-dashboard.dashboard-kurucular.dashboard-etkinlik
+  h3.dashboard-title Gelecek Etkinlikler
+  - if (futureEvents.length)
+    ul.dashboard-list.kurucular-list
+      - each event in futureEvents
+        li
+          a.kurucu-isim(href="/yonetim/etkinlikler/"+event._id+"/duzenle")
+            img.photo(src="/images/events/thumbnail/"+event.photoUrl, width=28, height=28)
+            | #{event.name}
+          a.sil-button(href="/yonetim/etkinlikler/"+event._id+"/sil")= "SİL"
+  - else
+    span.kurucu-isim Hiç etkinlik yok!
+            
+.dashboard.sag-dashboard.dashboard-kurucular.dashboard-etkinlik
+  h3.dashboard-title Geçmiş Etkinlikler
+  - if (missedEvents.length)
+    ul.dashboard-list.kurucular-list
+      - each event in missedEvents
+        li
+          a.kurucu-isim(href="/yonetim/etkinlikler/"+event._id+"/duzenle")
+            img.photo(src="/images/events/thumbnail/"+event.photoUrl, width=28, height=28)
+            | #{event.name}
+          a.sil-button(href="/yonetim/etkinlikler/"+event._id+"/sil")= "SİL"
+  - else
+    span.kurucu-isim Hiç etkinlik yok!
+
+.clear
